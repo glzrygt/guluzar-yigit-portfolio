@@ -7,7 +7,6 @@ Before starting, I watched the tutorial recommended by my professor:
 
 However, I initially struggled to follow along because I didn’t fully understand how to navigate directories in PowerShell and clone repositories properly.
 
----
 
 ## Initial Problem
 Before watching the tutorial, I was actually working on a separate task — trying to fix an **OpenLayers NDVI map visualization error**.  
@@ -24,7 +23,6 @@ The term 'https://github.com/...' is not recognized as the name of a cmdlet, fun
 
 That’s when I realized that I needed to use the proper Git command syntax: git clone <url>
 
----
 
 ## What I Did Next
 With the assistance of AI tools, I debugged command-line errors and learned the proper workflow.  
@@ -41,7 +39,6 @@ I followed these steps:
    git commit -m "Update portfolio files"
    git push origin main
 
----
 
 ## What I Learned
 - The difference between copying files and using version control  
@@ -51,19 +48,16 @@ I followed these steps:
 - Why the OpenLayers example alone was insufficient — because it required hosting local JS and HTML files together, which the browser blocks if not run locally or via a local server  
 - How AI guidance can support understanding and documenting every step clearly  
 
----
 
 ## Reflection
 This exercise taught me to not just follow tutorials but to **understand the reasoning** behind each step.  
 Instead of copying code, I now know how to **diagnose, test, and fix errors systematically** — exactly what a professional engineer should do.
 
----
 
 ## Acknowledgment
 With the assistance of AI tools, I debugged command-line errors and learned the proper Git workflow.  
 AI support helped me understand why terminal commands were necessary and how to properly document my learning process for academic evaluation.
 
----
 
 ## Author
 **Gülüzar Yiğit**  
