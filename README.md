@@ -7,7 +7,6 @@ Before starting, I watched the tutorial recommended by my professor:
 
 However, I initially struggled to follow along because I didn’t fully understand how to navigate directories in PowerShell and clone repositories properly.
 
-
 ## Initial Problem
 Before watching the tutorial, I was actually working on a separate task — trying to fix an **OpenLayers NDVI map visualization error**.  
 While troubleshooting that, I needed to clone a GitHub repository to my local folder (`personal-folder`) for version tracking.  
@@ -22,7 +21,6 @@ When I first tried to clone, I accidentally pasted the GitHub URL directly into 
 The term 'https://github.com/...' is not recognized as the name of a cmdlet, function, script file, or operable program.
 
 That’s when I realized that I needed to use the proper Git command syntax: git clone <url>
-
 
 ## What I Did Next
 With the assistance of AI tools, I debugged command-line errors and learned the proper workflow.  
@@ -47,9 +45,9 @@ so visitors could explore real satellite-based vegetation data interactively.
 At first, I copied the example code from the OpenLayers website, but it didn’t work locally — the map stayed blank.
 The console displayed CORS errors and “module not found” messages. I turned again to AI assistance (ChatGPT-5) to understand why this happened.
 Together, we discovered that:
--The NDVI example was written using ES Modules (import statements),
--Browsers cannot run such imports directly without a development server,
--A module bundler (like Vite) was necessary to handle imports and run the map properly.
+- The NDVI example was written using ES Modules (import statements),
+- Browsers cannot run such imports directly without a development server,
+- A module bundler (like Vite) was necessary to handle imports and run the map properly.
 ## How I Solved It
 We followed these steps to get the OpenLayers NDVI map working:
 1. Created a package.json file to manage dependencies:
@@ -101,7 +99,6 @@ We followed these steps to get the OpenLayers NDVI map working:
 6. Started the development server:
    npm run start
 The map finally loaded successfully and computed live NDVI values from real Sentinel-2 bands.
-   
 
 ## What I Learned
 - The difference between copying files and using version control  
@@ -110,20 +107,20 @@ The map finally loaded successfully and computed live NDVI values from real Sent
 - The Git workflow: **add → commit → push**  
 - Why the OpenLayers example alone was insufficient — because it required hosting local JS and HTML files together, which the browser blocks if not run locally or via a local server  
 - How AI guidance can support understanding and documenting every step clearly  
--The difference between static HTML embedding and modular JavaScript development
--Why browsers block GeoTIFF requests without proper CORS handling
--How to configure PowerShell permissions safely
--How Vite works as a modern web development server
--How to combine AI explanations with practical debugging to understand every step deeply
+- The difference between static HTML embedding and modular JavaScript development
+- Why browsers block GeoTIFF requests without proper CORS handling
+- How to configure PowerShell permissions safely
+- How Vite works as a modern web development server
+- How to combine AI explanations with practical debugging to understand every step deeply
 
 ## Reflection
 This exercise taught me to not just follow tutorials but to **understand the reasoning** behind each step.  
 Instead of copying code, I now know how to **diagnose, test, and fix errors systematically** — exactly what a professional engineer should do.
 This process taught me that problem-solving in software isn’t just about following tutorials — it’s about understanding the logic behind each layer of the workflow.
 By combining my own effort with AI-assisted reasoning, I learned to:
--identify the root cause of technical issues,
--apply the correct tools,
--and document the full process transparently.
+- identify the root cause of technical issues,
+- apply the correct tools,
+- and document the full process transparently.
 Now, I understand how real web-based GIS applications integrate front-end, data layers, and local hosting environments.
 
 ## Acknowledgment
