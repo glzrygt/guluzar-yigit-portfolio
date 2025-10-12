@@ -28,14 +28,14 @@ I followed these steps:
 
 1. Open PowerShell **as Administrator**  
 2. Set the execution policy using: Set-ExecutionPolicy RemoteSigned
-3. Navigate into my working folder: cd "C:\Users\guluz\OneDrive\Masaüstü\personal-folder"
-4. Clone my GitHub repository correctly: git clone https://github.com/glzrygt/guluzar-yigit-portfolio.git
+3. Navigate into my working folder: '''cd "C:\Users\guluz\OneDrive\Masaüstü\personal-folder"'''
+4. Clone my GitHub repository correctly: '''git clone https://github.com/glzrygt/guluzar-yigit-portfolio.git'''
 5. Move my local project files into the cloned repository folder  
 6. Configure Git credentials (`user.name` & `user.email`)  
 7. Commit and push all changes:
-   git add .
+   '''git add .
    git commit -m "Update portfolio files"
-   git push origin main
+   git push origin main'''
 ## The NDVI (OpenLayers) Challenge
 
 After completing the version control setup, I focused again on the NDVI part of my project.
@@ -51,6 +51,7 @@ Together, we discovered that:
 ## How I Solved It
 We followed these steps to get the OpenLayers NDVI map working:
 1. Created a package.json file to manage dependencies:
+'''
 {
   "name": "ndvi-map",
   "dependencies": { "ol": "10.6.1" },
@@ -59,11 +60,11 @@ We followed these steps to get the OpenLayers NDVI map working:
     "start": "vite",
     "build": "vite build"
   }
-}
-2. Installed dependencies:
-   npm install
-3. Created main.js to handle the NDVI logic:
-  
+}'''
+3. Installed dependencies:
+   '''npm install'''
+4. Created main.js to handle the NDVI logic:
+   '''  
    import Map from 'ol/Map.js';
    import TileLayer from 'ol/layer/WebGLTile.js';
    import GeoTIFF from 'ol/source/GeoTIFF.js';
@@ -92,12 +93,13 @@ We followed these steps to get the OpenLayers NDVI map working:
     target: 'map',
    layers: [layer],
    view: source.getView()
-   });
-5. Added it to my projects.html with:
+   });'''
+6. Added it to my projects.html with:
+   '''
    <div id="map"></div>
-   <script type="module" src="/main.js"></script>
-6. Started the development server:
-   npm run start
+   <script type="module" src="/main.js"></script> '''
+8. Started the development server:
+   '''npm run start'''
 The map finally loaded successfully and computed live NDVI values from real Sentinel-2 bands.
 
 ## What I Learned
