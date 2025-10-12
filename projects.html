@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects — Gülüzar Yiğit</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
+  <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
 </head>
 
 <body>
@@ -35,14 +36,9 @@
           visualization. Results revealed ~8,933 ha of vegetation loss, with notable clustering of moderate-to-severe burns 
           around Germiyan and Nohutalan.
         </p>
-        <p>
-          If you’d like to see further details, please contact me via 
-          <a href="mailto:guluzaryigit@hacettepe.edu.tr" class="pink">email</a> 
-          or 
-          <a href="https://www.linkedin.com/in/guluzaryigit" target="_blank" class="pink">LinkedIn</a>.
-        </p>
+        <a href="https://www.linkedin.com/in/guluzaryigit" target="_blank" class="btn">View Full Report</a>
       </div>
-    </div>  
+    </div>
 
     <h2 style="text-align:center; margin-top:80px;">Interactive Global NDVI Map</h2>
     <div id="map" style="width:90%; height:500px; margin:40px auto; border-radius:12px; box-shadow:0 0 20px #ff004f55;"></div>
@@ -74,7 +70,6 @@
         ['linear'],
         ['/', ['-', ['band', 2], ['band', 1]], ['+', ['band', 2], ['band', 1]]],
         -0.2, [191, 191, 191],
-        -0.1, [219, 219, 219],
         0, [255, 255, 224],
         0.25, [128, 179, 71],
         0.5, [48, 110, 28],
@@ -87,7 +82,7 @@
     target: 'map',
     layers: [layer],
     view: new ol.View({
-      center: ol.proj.fromLonLat([27.2, 38.3]), // İzmir merkez
+      center: ol.proj.fromLonLat([27.1, 38.4]), // İzmir çevresi
       zoom: 8,
     }),
   });

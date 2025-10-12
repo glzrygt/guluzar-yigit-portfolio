@@ -1,118 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gülüzar Yiğit Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gülüzar Yiğit Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.3.0/ol.css">
+  <script src="https://cdn.jsdelivr.net/npm/ol@v7.3.0/dist/ol.js"></script>
 </head>
+
 <body>
-    
-    <!-- Navbar -->
+  <div class="container">
+    <nav>
+      <img src="images/logo.jpg" class="logo" alt="logo">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div id="header">
+    <div class="header-text">
+      <h1>Hello, I'm <span>Gülüzar Yiğit</span></h1>
+      <p>Senior Geomatics Engineering Student</p>
+      <p>Welcome to my portfolio!</p>
+    </div>
+    <div class="right">
+      <img src="images/mezuniyet.jpg" alt="profile">
+    </div>
+  </div>
+
+  <div id="about">
     <div class="container">
-        <nav>
-            <img src="images/logo.jpg" class="logo" alt="logo">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Certificates</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
+      <h1 class="sub-title">About Me</h1>
+      <p>
+        Passionate Geomatics Engineering student trained in 
+        GIS, remote sensing, and satellite geodesy, with
+        hands-on experience in 2D mapping, photogrammetry,
+        and GNSS data analysis. Highly adaptable, team-oriented,
+        and keen to contribute to innovative geospatial projects.
+      </p>
+
+      <div class="tab-titles">
+        <p class="tab-links" onclick="opentab('skills')">Skills</p>
+        <p class="tab-links" onclick="opentab('experience')">Experience</p>
+        <p class="tab-links" onclick="opentab('education')">Education</p>
+        <p id="placeholder" class="placeholder">Please select a tab to view details.</p>
+      </div>
+
+      <div class="tab-contents" id="skills">
+        <ul>
+          <li><span><b>Intermediate</b></span><br>MapInfo<br>QGIS<br>Python<br>GoogleEarth Engine<br>Agisoft<br><br></li>
+          <li><span><b>Beginner</b></span><br>PostgreSQL<br>Pix4D<br>Virtual Surveyor<br>ArcGIS Pro<br>MicroStation<br>NetCad<br>Global Mapper<br>C#<br><br></li>
+        </ul>
+      </div>
+
+      <div class="tab-contents" id="experience">
+        <ul>
+          <li><span class="pink"><b>Internship /</b> Başarsoft IT Ankara</span></li>
+          <li><span>June 2025–August 2025</span></li>
+          <li><span class="pink"><b>Blogger /</b> Cartographero İstanbul</span></li>
+          <li><span>May 2025–August 2025</span></li>
+          <li><span class="pink"><b>Part-Time Technician /</b> MipMap Technologies</span></li>
+          <li><span>December 2024–April 2025</span></li>
+          <li><span class="pink"><b>Volunteer Internship /</b> Bilfer Mining</span></li>
+          <li><span>August 2024–September 2024</span></li>
+        </ul>
+      </div>
+
+      <div class="tab-contents" id="education">
+        <ul>
+          <li><span class="pink"><b>B.Sc. Geomatics Engineering, Hacettepe University</b></span></li>
+          <li><span>August 2020–Still<br>CGPA: 2.57<br>Graduation Project: Development Of A Tool For Smartphone GNSS Observations</span></li>
+        </ul>
+        <div id="map" style="width:90%; height:250px; margin:20px auto; border-radius:12px; box-shadow:0 0 15px #ff004f55;"></div>
+      </div>
     </div>
+  </div>
 
-    <!-- Header -->
-    <div id="header">
-        <div class="header-text">
-            <h1>Hello, I'm <span>Gülüzar Yiğit</span></h1>
-            <p>Senior Geomatics Engineering Student</p>
-            <p>Welcome to my portfolio!</p>
-        </div>
-        <div class="right">
-            <img src="images/mezuniyet.jpg" alt="profile">
-        </div>
-    </div>
-    <!----------------------about----------------->
-    <div id="about">
-        <div class="container">
-            <h1 class="sub-title">About Me</h1>
-            <p>
-                Passionate Geomatics Engineering student trained in 
-                <br>GIS, remote sensing, and satellite geodesy, with
-                <br>hands-on experience in 2D mapping, photogrammetry,
-                <br>and GNSS data analysis. Highly adaptable, team-oriented,
-                <br>and keen to contribute to innovative geospatial projects.</p>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const hacettepeCoords = [32.7339, 39.8655];
+  const map = new ol.Map({
+    target: 'map',
+    layers: [new ol.layer.Tile({ source: new ol.source.OSM() })],
+    view: new ol.View({
+      center: ol.proj.fromLonLat(hacettepeCoords),
+      zoom: 17
+    })
+  });
 
-                <div class="tab-titles">
-                    <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-                     <p class="tab-links" onclick="opentab('experience')">Experience</p>
-                    <p class="tab-links"onclick="opentab('education')">Education</p>
-                </div>
-                <div class="tab-contents active-tab" id="skills">
-                    <ul>
-                        <li><span><b>Intermediate</b></span><br>MapInfo<br>QGIS<br>Python<br>GoogleEarth Engine
-                            <br>Agisoft<br><br><br></li>
-                        <li><span><b>Beginner</b></span><br>PostgreSQL<br>Pix4D<br>Virtual Surveyor<br>
-                            ArcGIS Pro<br>MicroStation<br>NetCad & NetCad GIS<br>Global Mapper<br>C#<br><br><br></li>
-                    </ul>
-                </div>
-                <div class="tab-contents active-tab" id="experience">
-                    <ul>
-                        <li><span class="pink"><b>Internship /</b> Başarsoft IT Ankara, Türkiye</span></li>
-                        <li><span>June 2025-August 2025<br><br>Worked in the Data Team on GIS data validation,
-                        AI-based map editing,<br>
-                        and remote sensing research using tools like MapInfo and satellite<br>
-                        imagery. Used MapInfo to digitize gas station POIs, assign road codes,<br>
-                        and establish spatial/topological connections between POIs and the<br>
-                        road network. Tasks included POI-numbering linking and geospatial<br>
-                        quality assurance for map delivery.<br><br><br></span></li>
+  const marker = new ol.Feature({
+    geometry: new ol.geom.Point(ol.proj.fromLonLat(hacettepeCoords))
+  });
+  marker.setStyle(new ol.style.Style({
+    image: new ol.style.Circle({
+      radius: 8,
+      fill: new ol.style.Fill({ color: '#ff004f' }),
+      stroke: new ol.style.Stroke({ color: '#fff', width: 2 })
+    })
+  }));
 
-                        <li><span class="pink"><b>Part-Time Technician /</b> MipMap Technologies Ankara, Türkiye</span></li>
-                        <li><span>December 2024-April 2025<br><br>Conducted 2D mapping using Global Mapper as part<br>
-                        of the digital twin project for Mecca.<br><br><br></span></li>
+  const vectorSource = new ol.source.Vector({ features: [marker] });
+  const markerLayer = new ol.layer.Vector({ source: vectorSource });
+  map.addLayer(markerLayer);
 
-                        <li><span class="pink"><b>Volunteer Internship /</b> Bilfer Mining Ankara,Türkiye<br></span></li>
-                        <li><span>August 2024-September 2024<br><br>Aerial imagery of chromite mines was processed<br>
-                        using Pix4D, Virtual Surveyor, and NetCad GIS for volumetric calculations and other<br>
-                        numerical analyses.<br><br><br></span></li>
-
-                        <li><span class="pink"><b>Internship /</b> BMD Engineering & Consulting Ankara, Türkiye<br></span></li>
-                        <li><span>July 2024<br><br>Used MicroStation to produce a hydrographic map of Köyceğiz Lake<br>
-                        incollaboration with the DSİ, including bathymetric data analysis and vectorization.<br>
-                        Digitized architectural projects for Istanbul.<br><br><br></span></li>
-
-                        <li><span class="pink"><b>Volunteer Internship /</b> Geoks Mapping Ankara, Türkiye<br></span></li>
-                        <li><span>July 2023-August 2023<br><br>Participated in the Ankara Land Consolidation<br>
-                        Project in collaboration with the DSİ. Used NetCad for land consolidation <br>
-                        and title deed file preparation.<br><br><br></span></li>
-                    </ul>
-                </div>
-                <div class="tab-contents active-tab" id="education">
-                    <li><span class="pink"><b>B.Sc.<br>Geomatic Engineering, Hacettepe University Ankara, Türkiye</b><br></span></li>
-                    <li><span>August 2020-Still<br>CGPA:2,57<br>Graduation Project: Development Of A Tool<br>
-                    For Smartphone GNSS Observations<br></span></li>
-                </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-function opentab(tabname){
-  var tablinks = document.getElementsByClassName("tab-links");
-  var tabcontents = document.getElementsByClassName("tab-contents");
-  for(tablink of tablinks){
-    tablink.classList.remove("active-link");
-  }
-  for(tabcontent of tabcontents){
-    tabcontent.classList.remove("active-tab");
-  }
-  event.currentTarget.classList.add("active-link");
-  document.getElementById(tabname).classList.add("active-tab");
-}
-</script>
-Gülüzar Yiğit 2025
-
+  window.opentab = function(tabname) {
+    const tablinks = document.getElementsByClassName("tab-links");
+    const tabcontents = document.getElementsByClassName("tab-contents");
+    for (let tablink of tablinks) tablink.classList.remove("active-link");
+    for (let tabcontent of tabcontents) tabcontent.classList.remove("active-tab");
+    event.currentTarget.classList.add("active-link");
+    document.getElementById(tabname).classList.add("active-tab");
+    document.getElementById("placeholder").classList.add("hidden");
+    if (tabname === 'education') setTimeout(() => map.updateSize(), 200);
+  };
+});
+  </script>
 </body>
 </html>
