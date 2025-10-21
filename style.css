@@ -156,13 +156,14 @@ nav ul li a:hover {
   color: #fff;
   line-height: 1.6;
 }
-#about ul li::before {
+#about ul li:has(.pink)::before {
   content: "•";
   color: #ff004f;
   position: absolute;
   left: -15px;
   font-size: 20px;
 }
+
 .pink {
   color: #ff004f;
   font-weight: 600;
@@ -314,4 +315,29 @@ main.page {
 .contact-links .btn {
   min-width: 160px;
   text-align: center;
+}
+
+
+.icon {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0f0f0f;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 40px;
+  text-decoration: none;
+  border: 1px solid #ff004f;
+  transition: all 0.3s ease;
+}
+.contact-links a:hover {
+  background: #ff004f;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ff004f;
 }

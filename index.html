@@ -6,17 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gülüzar Yiğit Portfolio</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.3.0/ol.css">
-  <script src="https://cdn.jsdelivr.net/npm/ol@v7.3.0/dist/ol.js"></script>
 </head>
 
 <body>
   <div class="container">
     <nav>
-      <img src="images/logo.jpg" class="logo" alt="logo">
+      <img src="/guluzar-yigit-portfolio/public/images/logo.jpg" class="logo" alt="logo">
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="certificates.html">Certificates</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -31,7 +29,7 @@
       <p>Welcome to my portfolio!</p>
     </div>
     <div class="right">
-      <img src="images/mezuniyet.jpg" alt="profile">
+      <img src="/guluzar-yigit-portfolio/public/images/mezuniyet.jpg" alt="profile">
     </div>
   </div>
 
@@ -47,16 +45,15 @@
       </p>
 
       <div class="tab-titles">
-        <p class="tab-links" onclick="opentab('skills')">Skills</p>
+        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
         <p class="tab-links" onclick="opentab('experience')">Experience</p>
         <p class="tab-links" onclick="opentab('education')">Education</p>
-        <p id="placeholder" class="placeholder">Please select a tab to view details.</p>
       </div>
 
-      <div class="tab-contents" id="skills">
+      <div class="tab-contents active-tab" id="skills">
         <ul>
-          <li><span><b>Intermediate</b></span><br>MapInfo<br>QGIS<br>Python<br>GoogleEarth Engine<br>Agisoft<br><br></li>
-          <li><span><b>Beginner</b></span><br>PostgreSQL<br>Pix4D<br>Virtual Surveyor<br>ArcGIS Pro<br>MicroStation<br>NetCad<br>Global Mapper<br>C#<br><br></li>
+          <li><span class="pink"><b>Intermediate</b></span><br>MapInfo<br>QGIS<br>Python<br>GoogleEarth Engine<br>Agisoft<br><br></li>
+          <li><span class="pink"><b>Beginner</b></span><br>PostgreSQL<br>Pix4D<br>Virtual Surveyor<br>ArcGIS Pro<br>MicroStation<br>NetCad<br>Global Mapper<br>C#<br><br></li>
         </ul>
       </div>
 
@@ -70,57 +67,53 @@
           <li><span>December 2024–April 2025</span></li>
           <li><span class="pink"><b>Volunteer Internship /</b> Bilfer Mining</span></li>
           <li><span>August 2024–September 2024</span></li>
+          <li><span class="pink"><b>Internship /</b> BMD Engineering&Consulting</span></li>
+          <li><span>July-2022</span></li>
+          <li><span class="pink"><b>Volunteer Internship /</b> Geoks Mapping</span></li>
+          <li><span>August-2020 </span></li>
         </ul>
       </div>
 
       <div class="tab-contents" id="education">
         <ul>
           <li><span class="pink"><b>B.Sc. Geomatics Engineering, Hacettepe University</b></span></li>
-          <li><span>August 2020–Still<br>CGPA: 2.57<br>Graduation Project: Development Of A Tool For Smartphone GNSS Observations</span></li>
+          <li><span>August 2020–Still</span></li>
         </ul>
-        <div id="map" style="width:90%; height:250px; margin:20px auto; border-radius:12px; box-shadow:0 0 15px #ff004f55;"></div>
-      </div>
-    </div>
-  </div>
+        <div 
+  style="
+    position: relative;
+    width: 90%; 
+    height: 300px; 
+    margin: 20px auto; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    box-shadow: 0 0 15px #ff004f55;
+  "
+>
+  <!-- Google Maps -->
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.6553398912931!2d32.73371143899143!3d39.86560364344993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d3474234dd5eb3%3A0x5a6c30cb932231a0!2sGeomatik%20M%C3%BChendisli%C4%9Fi!5e0!3m2!1str!2str!4v1761063125764!5m2!1str!2str"
+    style="border: 0; width: 100%; height: 100%; display: block;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+</div>
+</div>
+</div>
 
   <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const hacettepeCoords = [32.7339, 39.8655];
-  const map = new ol.Map({
-    target: 'map',
-    layers: [new ol.layer.Tile({ source: new ol.source.OSM() })],
-    view: new ol.View({
-      center: ol.proj.fromLonLat(hacettepeCoords),
-      zoom: 17
-    })
-  });
+    const tabLinks = document.querySelectorAll(".tab-links");
+    const tabContents = document.querySelectorAll(".tab-contents");
 
-  const marker = new ol.Feature({
-    geometry: new ol.geom.Point(ol.proj.fromLonLat(hacettepeCoords))
-  });
-  marker.setStyle(new ol.style.Style({
-    image: new ol.style.Circle({
-      radius: 8,
-      fill: new ol.style.Fill({ color: '#ff004f' }),
-      stroke: new ol.style.Stroke({ color: '#fff', width: 2 })
-    })
-  }));
-
-  const vectorSource = new ol.source.Vector({ features: [marker] });
-  const markerLayer = new ol.layer.Vector({ source: vectorSource });
-  map.addLayer(markerLayer);
-
-  window.opentab = function(tabname) {
-    const tablinks = document.getElementsByClassName("tab-links");
-    const tabcontents = document.getElementsByClassName("tab-contents");
-    for (let tablink of tablinks) tablink.classList.remove("active-link");
-    for (let tabcontent of tabcontents) tabcontent.classList.remove("active-tab");
-    event.currentTarget.classList.add("active-link");
-    document.getElementById(tabname).classList.add("active-tab");
-    document.getElementById("placeholder").classList.add("hidden");
-    if (tabname === 'education') setTimeout(() => map.updateSize(), 200);
-  };
-});
+    function opentab(tabName) {
+      tabLinks.forEach(link => link.classList.remove("active-link"));
+      tabContents.forEach(content => content.classList.remove("active-tab"));
+      document.querySelector(`[onclick="opentab('${tabName}')"]`).classList.add("active-link");
+      document.getElementById(tabName).classList.add("active-tab");
+    }
   </script>
+
 </body>
 </html>
