@@ -5,18 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects — Gülüzar Yiğit</title>
 
-  <!-- Senin stillerin -->
+  <!-- Senin genel stillerin -->
   <link rel="stylesheet" href="style.css?v=2">
 
-  <!-- OpenLayers v9 bundle (tek dosya, ESM bağımlılık sorunlarını çözer) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@8.2.0/ol.css">
-  <script src="https://cdn.jsdelivr.net/npm/ol@8.2.0/dist/ol.js"></script>
+  <!-- OpenLayers -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
 </head>
 
 <body>
   <div class="container">
     <nav>
-      <img src="/guluzar-yigit-portfolio/public/images/logo.jpg" class="logo" alt="logo">
+      <img src="images/logo.jpg" class="logo" alt="logo">
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="index.html#about">About</a></li>
@@ -31,14 +30,10 @@
     <h1>Projects</h1>
 
     <div class="project-hero">
-<<<<<<< HEAD
-      <img src="/guluzar-yigit-portfolio/public/images/ndvi.png" alt="NDVI Project">
-=======
-      <img src="images/uc_ilce.png" alt="NDVI Project">
->>>>>>> 496f866019588234b28df85aadf185d968671741
+      <img src="images/uc_ilce.png" alt="Wildfire Project">
       <div class="project-text">
-        <h2>NDVI-Based Wildfire Impact Assessment of İzmir (2025)</h2>
-        <p> 
+        <h2>Wildfire Impact Assessment — İzmir (2025)</h2>
+        <p>
           Conducted a post-fire vegetation analysis for İzmir’s Çeşme, Karaburun, and Urla districts using 
           <span class="pink">Sentinel-2</span> data on <span class="pink">Google Earth Engine</span>. 
           Quantified fire severity via ΔNDVI classification, integrating <span class="pink">QGIS</span> for spatial 
@@ -47,69 +42,86 @@
         </p>
         <a href="https://www.linkedin.com/in/guluzaryigit" target="_blank" class="btn">To View Further Contact Me</a>
       </div>
-<<<<<<< HEAD
-    </div>
-=======
     </div>
 
-    <h2 style="text-align:center; margin-top:80px;">Interactive Global NDVI Map</h2>
-    <div id="map" style="width:90%; height:500px; margin:40px auto; border-radius:12px; box-shadow:0 0 20px #ff004f55;"></div>
-    <div style="text-align:center; font-size:18px; margin-bottom:60px;">
-      NDVI value: <span id="output" class="pink">hover to see</span>
+    <!-- 🔥 Türkiye Yangın Haritası -->
+    <h2 style="text-align:center; margin-top:80px;">2025 Wildfire Regions in Türkiye</h2>
+    <div id="fireMap" style="width:90%; height:500px; margin:40px auto; border-radius:12px; box-shadow:0 0 20px #ff004f55;"></div>
+    <div id="popup" style="
+      position:absolute; 
+      background:white; 
+      padding:8px 12px; 
+      border-radius:8px; 
+      border:2px solid #ff004f; 
+      box-shadow:0 0 10px #ff004f55; 
+      display:none; 
+      pointer-events:none;
+      font-weight:bold;
+      color:#ff004f;">
     </div>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
-  <script>
-  const source = new ol.source.GeoTIFF({
-    sources: [
-      {
-        url: 'https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/36/Q/WD/2020/7/S2A_36QWD_20200701_0_L2A/B04.tif',
-        max: 10000,
-      },
-      {
-        url: 'https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/36/Q/WD/2020/7/S2A_36QWD_20200701_0_L2A/B08.tif',
-        max: 10000,
-      },
-    ],
-  });
+  <script type="module">
+    import Map from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/Map.js';
+    import View from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/View.js';
+    import {fromLonLat} from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/proj.js';
+    import VectorLayer from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/layer/Vector.js';
+    import VectorSource from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/source/Vector.js';
+    import Feature from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/Feature.js';
+    import Point from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/geom/Point.js';
+    import {Style, Circle, Fill, Stroke} from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/style.js';
 
-  const layer = new ol.layer.WebGLTile({
-    source: source,
-    style: {
-      color: [
-        'interpolate',
-        ['linear'],
-        ['/', ['-', ['band', 2], ['band', 1]], ['+', ['band', 2], ['band', 1]]],
-        -0.2, [191, 191, 191],
-        0, [255, 255, 224],
-        0.25, [128, 179, 71],
-        0.5, [48, 110, 28],
-        0.65, [0, 69, 0],
-      ],
-    },
-  });
+    const fireData = [
+      { name: 'İzmir', coords: [27.1384, 38.4192], color: '#ff4f4f', date: '12 July 2025' },
+      { name: 'Muğla', coords: [28.3636, 37.2153], color: '#ff884f', date: '20 July 2025' },
+      { name: 'Antalya', coords: [30.7133, 36.8969], color: '#ffbb33', date: '25 July 2025' },
+      { name: 'Çanakkale', coords: [26.4086, 40.1451], color: '#ff0066', date: '03 August 2025' },
+      { name: 'Adana', coords: [35.3213, 37.0022], color: '#ff9900', date: '15 August 2025' }
+    ];
 
-  const map = new ol.Map({
-    target: 'map',
-    layers: [layer],
-    view: new ol.View({
-      center: ol.proj.fromLonLat([27.1, 38.4]), // İzmir çevresi
-      zoom: 8,
-    }),
-  });
+    const features = fireData.map(f => {
+      const feature = new Feature({
+        geometry: new Point(fromLonLat(f.coords)),
+        name: f.name,
+        date: f.date,
+      });
+      feature.setStyle(new Style({
+        image: new Circle({
+          radius: 10,
+          fill: new Fill({ color: f.color }),
+          stroke: new Stroke({ color: '#fff', width: 2 }),
+        })
+      }));
+      return feature;
+    });
 
-  const output = document.getElementById('output');
-  map.on(['pointermove', 'click'], (event) => {
-    const data = layer.getData(event.pixel);
-    if (!data) return;
-    const red = data[0];
-    const nir = data[1];
-    const ndvi = (nir - red) / (nir + red);
-    output.textContent = ndvi.toFixed(2);
-  });
-  </script>
-</body>
-</html>
+    const vectorLayer = new VectorLayer({
+      source: new VectorSource({ features }),
+    });
 
->>>>>>> 496f866019588234b28df85aadf185d968671741
+    const map = new Map({
+      target: 'fireMap',
+      layers: [vectorLayer],
+      view: new View({
+        center: fromLonLat([29, 39]),
+        zoom: 6,
+      }),
+    });
+
+    const popup = document.getElementById('popup');
+    map.on('pointermove', (evt) => {
+      const feature = map.forEachFeatureAtPixel(evt.pixel, f => f);
+      if (feature) {
+        const name = feature.get('name');
+        const date = feature.get('date');
+        popup.style.display = 'block';
+        popup.style.left = evt.pixel[0] + 15 + 'px';
+        popup.style.top = evt.pixel[1] + 'px';
+        popup.innerHTML = `${name}<br><small>${date}</small>`;
+      } else {
+        popup.style.display = 'none';
+      }
+    });
+    </script>
+    </body>
+    </html>
