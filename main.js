@@ -1,18 +1,18 @@
-// Initialize the map with OpenLayers
+// Initialize OpenLayers map
 var map = new ol.Map({
   target: 'map',  // Map will be rendered in the 'map' div
   layers: [
     new ol.layer.Tile({
-      source: new ol.source.OSM()  // OpenStreetMap as the base layer
+      source: new ol.source.OSM()  // Using OpenStreetMap as the base layer
     })
   ],
   view: new ol.View({
-    center: ol.proj.fromLonLat([27.1287, 38.4192]),  // İzmir coordinates
+    center: ol.proj.fromLonLat([27.1287, 38.4192]),  // Coordinates for İzmir
     zoom: 10  // Initial zoom level for İzmir
   })
 });
 
-// Style for the fire emoji
+// Define style for fire emoji using ol.style.Text
 var fireIconStyle = new ol.style.Style({
   text: new ol.style.Text({
     text: '🔥',  // Fire emoji
@@ -21,17 +21,17 @@ var fireIconStyle = new ol.style.Style({
       color: '#ff004f'  // Red color for the emoji
     }),
     stroke: new ol.style.Stroke({
-      color: '#fff',  // White stroke around the emoji
+      color: '#fff',  // White stroke around the emoji for better visibility
       width: 2
     })
   })
 });
 
-// Coordinates for the fire markers (Germiyan, Nohutalan, Ildır)
+// Fire markers for Germiyan (coordinates)
 var fireMarkers = [
-  { lat: 38.35028, lon: 26.50972 },  // Germiyan
-  { lat: 38.2494, lon: 26.2900 },    // Nohutalan
-  { lat: 38.2228, lon: 26.2946 }     // Ildır
+  { lat: 38.35028, lon: 26.50972 },  // Germiyan coordinates in decimal degrees
+  { lat: 38.2494, lon: 26.2900 },    // Nohutalan coordinates
+  { lat: 38.2228, lon: 26.2946 }     // Ildır coordinates
 ];
 
 // Convert fireMarkers array to OpenLayers features (for placing markers)
@@ -66,4 +66,3 @@ fireFeatures.forEach(function(feature) {
     feature.getGeometry().setCoordinates(ol.proj.fromLonLat([feature.getGeometry().getCoordinates()[0] - 0.0001, feature.getGeometry().getCoordinates()[1]]));
   }, animationDuration);
 });
-
