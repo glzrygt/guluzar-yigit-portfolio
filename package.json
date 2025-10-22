@@ -4,7 +4,7 @@
   "description": "A project using OpenLayers",
   "main": "main.js",
   "dependencies": {
-    "ol": "^6.0.0"  // OpenLayers dependency
+    "ol": "^6.0.0"
   },
   "devDependencies": {},
   "scripts": {
