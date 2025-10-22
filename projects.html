@@ -1,38 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects — Gülüzar Yiğit</title>
-  
+  <meta charset="UTF-8" />  <!-- Defines the character encoding (UTF-8 supports a wide range of characters) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <!-- Ensures the page is mobile-responsive -->
+  <title>Projects — Gülüzar Yiğit</title>  <!-- The title of the page that appears in the browser tab -->
+
   <!-- External CSS Files -->
-  <link rel="stylesheet" href="style.css?v=2">  <!-- Local CSS File -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">  <!-- OpenLayers CSS -->
+  <link rel="stylesheet" href="style.css?v=2">  <!-- Local CSS file for custom styling, with versioning to ensure browsers fetch the updated version -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">  <!-- OpenLayers CSS for maps -->
 
 </head>
 
 <body>
   <div class="container">
     <nav>
+      <!-- Logo image -->
       <img src="/guluzar-yigit-portfolio/public/images/logo.jpg" class="logo" alt="logo">
+      
+      <!-- Navigation menu -->
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#about">About</a></li>
-        <li><a href="projects.html" class="active">Projects</a></li>
-        <li><a href="certificates.html">Certificates</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="index.html">Home</a></li>  <!-- Links to the homepage -->
+        <li><a href="index.html#about">About</a></li>  <!-- Links to the "About" section on the homepage -->
+        <li><a href="projects.html" class="active">Projects</a></li>  <!-- Current page: Projects -->
+        <li><a href="certificates.html">Certificates</a></li>  <!-- Links to the certificates page -->
+        <li><a href="contact.html">Contact</a></li>  <!-- Links to the contact page -->
       </ul>
     </nav>
   </div>
 
   <main class="page">
+    <!-- Main heading of the page -->
     <h1>Projects</h1>
 
-    <!-- Hero Section for Project -->
+    <!-- Hero section for the featured project -->
     <div class="project-hero">
+      <!-- Image related to the project -->
       <img src="public/images/ndvi.png" alt="Wildfire Project">
+      
       <div class="project-text">
+        <!-- Project title -->
         <h2>2025 Wildfire Impact Assessment in İzmir</h2>
+        
+        <!-- Project description -->
         <p>
           Conducted a post-fire vegetation analysis for İzmir’s Çeşme, Karaburun, and Urla districts using 
           <span class="pink">Sentinel-2</span> data on <span class="pink">Google Earth Engine</span>. 
@@ -40,13 +49,15 @@
           visualization. Results revealed ~8,933 ha of vegetation loss, with notable clustering of moderate-to-severe burns 
           around Germiyan and Nohutalan.
         </p>
+        
+        <!-- Button linking to LinkedIn for further contact -->
         <a href="https://www.linkedin.com/in/guluzaryigit" target="_blank" class="btn">To View Further Contact Me</a>
       </div>
     </div>
+
+    <!-- Popup element for future use (currently hidden) -->
     <div id="popup" style="position:absolute; background:white; padding:8px 12px; border-radius:8px; border:2px solid #ff004f; box-shadow:0 0 10px #ff004f55; display:none; pointer-events:none; font-weight:bold; color:#ff004f;"></div>
   </main>
 </body>
 </html>
-
-
 
