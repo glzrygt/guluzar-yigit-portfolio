@@ -62,64 +62,91 @@
     <div id="map" style="width: 100%; height: 500px;"></div>
 
     <script>
-      // Initialize OpenLayers map
-      var map = new ol.Map({
-        target: 'map',  // Map will be rendered in the 'map' div
+    // Initialize OpenLayers map
+    var map = new ol.Map({
+        target: 'map',
         layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()  // Using OpenStreetMap as the base layer
-              })
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            })
         ],
         view: new ol.View({
-          center: ol.proj.fromLonLat([27.1287, 38.4192]),  // Coordinates for İzmir
-          zoom: 10  // Initial zoom level
-          })
-      });
-      // Define style for fire icon
-      var fireIconStyle = new ol.style.Style({
+            // İzmit yerine İzmir koordinatları
+            center: ol.proj.fromLonLat([26.5, 38.25]), // Germiyan, Nohutalan civarında odaklanmak için
+            zoom: 11
+        })
+    });
+
+    // Define style for fire icon
+    var fireIconStyle = new ol.style.Style({
         image: new ol.style.Icon({
-          src: 'https://upload.wikimedia.org/wikipedia/commons/5/5d/BurningFlame0.gif',  // fire emogy GIF
-          scale: 0.1
-          })
-      });
-      // Fire markers for Germiyan and Nohutalan (coordinates)
-      var fireMarkers = [
+            // GIF kaynak adresi
+            src: 'https://upload.wikimedia.org/wikipedia/commons/5/5d/BurningFlame0.gif',
+            scale: 0.15, // Ölçeği biraz artırdım, daha görünür olması için
+            // Anchor ile ikonun alt orta noktasını koordinata hizalayabiliriz
+            anchor: [0.5, 1] 
+        })
+    });
+
+    // Fire markers for Germiyan and Nohutalan (coordinates)
+    var fireMarkers = [
         { lon: 26.3057, lat: 38.2121 }, // Germiyan
         { lon: 26.2900, lat: 38.2494 },  // Nohutalan
         { lon: 26.2946, lat: 38.2228 }  // Ildır
-        ];
-      // Convert fireMarkers array to OpenLayers features (for markers)
-      var fireFeatures = fireMarkers.map(function(marker) {
+    ];
+
+    // Convert fireMarkers array to OpenLayers features (for markers)
+    var fireFeatures = fireMarkers.map(function(marker) {
         var feature = new ol.Feature({
-          geometry: new ol.geom.Point(ol.proj.fromLonLat([marker.lon, marker.lat]))  // Convert coordinates to OpenLayers format
-            });
-        feature.setStyle(fireIconStyle);  // Apply the fire icon style to each feature
+            // Koordinatları Feature'ın içine kaydederken dönüştür
+            geometry: new ol.geom.Point(ol.proj.fromLonLat([marker.lon, marker.lat]))
+        });
+        feature.setStyle(fireIconStyle); // Stili uygula
         return feature;
-      });
-      // Create a vector source and add features (markers)
-      var vectorSource = new ol.source.Vector({
+    });
+
+    // Create a vector source and layer
+    var vectorSource = new ol.source.Vector({
         features: fireFeatures
-      });
-      // Create a vector layer to hold the fire markers
-      var vectorLayer = new ol.layer.Vector({
+    });
+    var vectorLayer = new ol.layer.Vector({
         source: vectorSource
-      });
-      // Add vector layer to the map
-      map.addLayer(vectorLayer);
-      // Add animation: slight movement for fire markers (shaking effect)
-      var animationDuration = 2000;  // Duration of the animation in milliseconds
-      fireFeatures.forEach(function(feature) {
-        // Slightly move the marker to the right
-        feature.getGeometry().setCoordinates(ol.proj.fromLonLat([feature.getGeometry().getCoordinates()[0] + 0.0001, feature.getGeometry().getCoordinates()[1]]));
-        setTimeout(function() {
-          // Move the marker back to its original position
-          feature.getGeometry().setCoordinates(ol.proj.fromLonLat([feature.getGeometry().getCoordinates()[0] - 0.0001, feature.getGeometry().getCoordinates()[1]]));
-        }, animationDuration);
-      });
-    </script>
+    });
+
+    // Add vector layer to the map
+    map.addLayer(vectorLayer);
+
+    // 🔥 Sürekli Titreşim (Alev Sallanması) Animasyonu
+    var shakeAmount = 200; // Harita birimlerinde (metre gibi) titreme miktarı
+    var shakeInterval = 100; // Titreme hızı (milisaniye)
+    var currentOffset = shakeAmount; // Başlangıç ofseti
+
+    // Her belirlenen aralıkta (100ms) çalışacak sürekli döngü
+    setInterval(function() {
+        // Ofset yönünü değiştir: 200 birim sağa, sonra 200 birim sola
+        currentOffset = -currentOffset;
+
+        fireFeatures.forEach(function(feature) {
+            var geometry = feature.getGeometry();
+            var coords = geometry.getCoordinates();
+
+            // Sadece X (boylam/doğu-batı) koordinatını değiştir
+            // Y (enlem/kuzey-güney) sabit kalır
+            var newCoords = [
+                coords[0] + currentOffset,
+                coords[1]
+            ];
+            
+            // Projeksiyonlu koordinatları doğrudan değiştir
+            geometry.setCoordinates(newCoords);
+        });
+
+    }, shakeInterval);
+</script>
   </main>
 </body>
 </html>
+
 
 
 
