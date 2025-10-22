@@ -77,10 +77,17 @@
       });
       // Define style for fire icon
       var fireIconStyle = new ol.style.Style({
-        image: new ol.style.Icon({
-          src: 'https://upload.wikimedia.org/wikipedia/commons/5/5d/BurningFlame0.gif',  // Fire icon
-          scale: 0.01  // Adjust size of the icon
+        text: new ol.style.Text({
+          text: '🔥',  // Using the fire emoji as the marker
+          font: '30px Arial',  // Font size
+          fill: new ol.style.Fill({
+          color: '#ff004f'  // Red color for the emoji
+            }),
+          stroke: new ol.style.Stroke({
+            color: '#fff',  // White stroke around the emoji for better visibility
+            width: 2
           })
+        })
       });
       // Fire markers for Germiyan and Nohutalan (coordinates)
       var fireMarkers = [
@@ -119,6 +126,7 @@
   </main>
 </body>
 </html>
+
 
 
 
