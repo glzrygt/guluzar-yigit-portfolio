@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gülüzar Yiğit Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">  <!-- Defines the character encoding (UTF-8 supports a wide range of characters) -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">  <!-- Ensures the page renders correctly in older versions of Internet Explorer -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Makes the page mobile-responsive -->
+  <title>Gülüzar Yiğit Portfolio</title>  <!-- Title of the page that appears in the browser tab -->
+  <link rel="stylesheet" href="style.css">  <!-- Link to the external stylesheet -->
 </head>
 
 <body>
   <div class="container">
     <nav>
-      <img src="/guluzar-yigit-portfolio/public/images/logo.jpg" class="logo" alt="logo">
+      <!-- Navigation menu with links to other pages -->
+      <img src="/guluzar-yigit-portfolio/public/images/logo.jpg" class="logo" alt="logo">  <!-- Logo image -->
       <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="certificates.html">Certificates</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="index.html" class="active">Home</a></li>  <!-- Link to Home page, with 'active' class indicating it's the current page -->
+        <li><a href="#about">About</a></li>  <!-- Link to the "About" section of the page -->
+        <li><a href="projects.html">Projects</a></li>  <!-- Link to Projects page -->
+        <li><a href="certificates.html">Certificates</a></li>  <!-- Link to Certificates page -->
+        <li><a href="contact.html">Contact</a></li>  <!-- Link to Contact page -->
       </ul>
     </nav>
   </div>
 
   <div id="header">
+    <!-- Main header section with text and image -->
     <div class="header-text">
-      <h1>Hello, I'm <span>Gülüzar Yiğit</span></h1>
-      <p>Senior Geomatics Engineering Student</p>
-      <p>Welcome to my portfolio!</p>
+      <h1>Hello, I'm <span>Gülüzar Yiğit</span></h1>  <!-- Main title with name -->
+      <p>Senior Geomatics Engineering Student</p>  <!-- Subtitle with profession -->
+      <p>Welcome to my portfolio!</p>  <!-- Short welcoming message -->
     </div>
     <div class="right">
-      <img src="/guluzar-yigit-portfolio/public/images/mezuniyet.jpg" alt="profile">
+      <img src="/guluzar-yigit-portfolio/public/images/mezuniyet.jpg" alt="profile">  <!-- Profile image -->
     </div>
   </div>
 
   <div id="about">
     <div class="container">
-      <h1 class="sub-title">About Me</h1>
+      <h1 class="sub-title">About Me</h1>  <!-- Section title -->
       <p>
         Passionate Geomatics Engineering student trained in 
         GIS, remote sensing, and satellite geodesy, with
@@ -44,12 +46,14 @@
         and keen to contribute to innovative geospatial projects.
       </p>
 
+      <!-- Tab titles for different sections (Skills, Experience, Education) -->
       <div class="tab-titles">
-        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-        <p class="tab-links" onclick="opentab('experience')">Experience</p>
-        <p class="tab-links" onclick="opentab('education')">Education</p>
+        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>  <!-- "Skills" tab -->
+        <p class="tab-links" onclick="opentab('experience')">Experience</p>  <!-- "Experience" tab -->
+        <p class="tab-links" onclick="opentab('education')">Education</p>  <!-- "Education" tab -->
       </div>
 
+      <!-- Skills tab content -->
       <div class="tab-contents active-tab" id="skills">
         <ul>
           <li><span class="pink"><b>Intermediate</b></span><br>MapInfo<br>QGIS<br>Python<br>GoogleEarth Engine<br>Agisoft<br><br></li>
@@ -57,63 +61,68 @@
         </ul>
       </div>
 
+      <!-- Experience tab content -->
       <div class="tab-contents" id="experience">
         <ul>
-          <li><span class="pink"><b>Internship /</b> Başarsoft IT Ankara</span></li>
+          <li><span class="pink"><b>Internship /</b> Başarsoft IT Ankara</span></li>  <!-- Internship at Başarsoft -->
           <li><span>June 2025–August 2025</span></li>
-          <li><span class="pink"><b>Blogger /</b> Cartographero İstanbul</span></li>
+          <li><span class="pink"><b>Blogger /</b> Cartographero İstanbul</span></li>  <!-- Blogging experience -->
           <li><span>May 2025–August 2025</span></li>
-          <li><span class="pink"><b>Part-Time Technician /</b> MipMap Technologies</span></li>
+          <li><span class="pink"><b>Part-Time Technician /</b> MipMap Technologies</span></li>  <!-- Part-time technician role -->
           <li><span>December 2024–April 2025</span></li>
-          <li><span class="pink"><b>Volunteer Internship /</b> Bilfer Mining</span></li>
+          <li><span class="pink"><b>Volunteer Internship /</b> Bilfer Mining</span></li>  <!-- Volunteer internship -->
           <li><span>August 2024–September 2024</span></li>
           <li><span class="pink"><b>Internship /</b> BMD Engineering&Consulting</span></li>
           <li><span>July-2022</span></li>
           <li><span class="pink"><b>Volunteer Internship /</b> Geoks Mapping</span></li>
-          <li><span>August-2020 </span></li>
+          <li><span>August-2020</span></li>
         </ul>
       </div>
 
+      <!-- Education tab content -->
       <div class="tab-contents" id="education">
         <ul>
           <li><span class="pink"><b>B.Sc. Geomatics Engineering, Hacettepe University</b></span></li>
-          <li><span>August 2020–Still</span></li>
+          <li><span>August 2020–Still</span></li>  <!-- Ongoing degree -->
         </ul>
+
+        <!-- Google Map showing Geomatics Engineering department location -->
         <div 
-  style="
-    position: relative;
-    width: 90%; 
-    height: 300px; 
-    margin: 20px auto; 
-    border-radius: 12px; 
-    overflow: hidden; 
-    box-shadow: 0 0 15px #ff004f55;
-  "
->
-  <!-- Google Maps -->
-  <iframe
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.6553398912931!2d32.73371143899143!3d39.86560364344993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d3474234dd5eb3%3A0x5a6c30cb932231a0!2sGeomatik%20M%C3%BChendisli%C4%9Fi!5e0!3m2!1str!2str!4v1761063125764!5m2!1str!2str"
-    style="border: 0; width: 100%; height: 100%; display: block;"
-    allowfullscreen=""
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
-</div>
-</div>
-</div>
-</div>
+          style="
+            position: relative;
+            width: 90%; 
+            height: 300px; 
+            margin: 20px auto; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 0 15px #ff004f55;
+          "
+        >
+          <!-- Google Maps iframe embedded -->
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d244.6553398912931!2d32.73371143899143!3d39.86560364344993!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d3474234dd5eb3%3A0x5a6c30cb932231a0!2sGeomatik%20M%C3%BChendisli%C4%9Fi!5e0!3m2!1str!2str!4v1761063125764!5m2!1str!2str"
+            style="border: 0; width: 100%; height: 100%; display: block;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
-    const tabLinks = document.querySelectorAll(".tab-links");
-    const tabContents = document.querySelectorAll(".tab-contents");
+    const tabLinks = document.querySelectorAll(".tab-links");  <!-- Select all tab links -->
+    const tabContents = document.querySelectorAll(".tab-contents");  <!-- Select all tab content sections -->
 
     function opentab(tabName) {
-      tabLinks.forEach(link => link.classList.remove("active-link"));
-      tabContents.forEach(content => content.classList.remove("active-tab"));
-      document.querySelector(`[onclick="opentab('${tabName}')"]`).classList.add("active-link");
-      document.getElementById(tabName).classList.add("active-tab");
+      tabLinks.forEach(link => link.classList.remove("active-link"));  <!-- Remove active state from all links -->
+      tabContents.forEach(content => content.classList.remove("active-tab"));  <!-- Hide all tab content -->
+      document.querySelector(`[onclick="opentab('${tabName}')"]`).classList.add("active-link");  <!-- Add active state to clicked tab link -->
+      document.getElementById(tabName).classList.add("active-tab");  <!-- Show the content of the clicked tab -->
     }
   </script>
 
 </body>
 </html>
+
