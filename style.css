@@ -426,3 +426,14 @@ nav ul li a.active::after {
   transform: scale(1.05); /* Slightly enlarge */
   box-shadow: 0 0 15px #ff004f; /* Add shadow effect */
 }
+/* Map container styling */
+#map {
+  width: 100%;  /* Make the map take the full width */
+  height: 500px;  /* Set a fixed height for the map */
+  border: 2px solid #ff004f;  /* Optional: Add a border around the map */
+  border-radius: 10px;  /* Optional: Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Optional: Add shadow for the map */
+  margin-top: 30px;  /* Optional: Add some space above the map */
+}
+
+
