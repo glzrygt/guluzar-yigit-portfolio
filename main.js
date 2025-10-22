@@ -1,81 +1,67 @@
-// OpenLayers modüllerini import ediyoruz
-import Map from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/Map.js';
-import View from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/View.js';
-import { fromLonLat } from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/proj.js';
-import VectorLayer from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/layer/Vector.js';
-import VectorSource from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/source/Vector.js';
-import Feature from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/Feature.js';
-import { Style, Fill, Stroke, Circle } from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/style.js';
-import { Point } from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/geom.js';
+// Harita Başlatma
+var map = L.map('map').setView([39.9, 32.85], 6);  // Türkiye'nin merkezi
 
-// Şehirlerin verilerini burada saklıyoruz (isim, koordinatlar ve renk)
-const fireData = [
-  { name: 'İzmir', coords: [27.1384, 38.4192], color: '#ff4f4f', date: '12 July 2025' },
-  { name: 'Muğla', coords: [28.3636, 37.2153], color: '#ff884f', date: '20 July 2025' },
-  { name: 'Antalya', coords: [30.7133, 36.8969], color: '#ffbb33', date: '25 July 2025' },
-  { name: 'Çanakkale', coords: [26.4086, 40.1451], color: '#ff0066', date: '03 August 2025' },
-  { name: 'Adana', coords: [35.3213, 37.0022], color: '#ff9900', date: '15 August 2025' }
-];
+// OpenStreetMap Katmanını Ekleme
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+}).addTo(map);
 
-// Harita üzerinde gösterilecek feature'ları oluşturuyoruz
-const features = fireData.map(f => {
-  const feature = new Feature({
-    geometry: new Point(fromLonLat(f.coords)), // Koordinatları harita projeksiyonuna dönüştürme
-    name: f.name,
-    date: f.date
-  });
-  feature.setStyle(new Style({
-    image: new Circle({
-      radius: 10,
-      fill: new Fill({ color: f.color }), // Her şehir için belirlenen renk
-      stroke: new Stroke({ color: '#fff', width: 2 }) // Beyaz kenarlık
-    })
-  }));
-  return feature;
-});
+// GeoJSON Verisini Haritaya Ekleyin
+function getColor(d) {
+    return d > 500 ? '#800026' :
+           d > 200  ? '#BD0026' :
+           d > 100  ? '#E31A1C' :
+           d > 50   ? '#FC4E2A' :
+           d > 20   ? '#FD8D3C' :
+           d > 10   ? '#FEB24C' :
+           '#FFEDA0';
+}
 
-// Harita katmanını oluşturuyoruz
-const vectorLayer = new VectorLayer({
-  source: new VectorSource({ features })
-});
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.severity),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
 
-// Harita nesnesini oluşturuyoruz
-const map = new Map({
-  target: 'fireMap',  // Haritanın yerleştirileceği element ID'si
-  layers: [
-    new ol.layer.Tile({
-      source: new ol.source.OSM(),  // OpenStreetMap katmanı
-    }),
-    vectorLayer // Şehirlerin bulunduğu vektör katmanını ekliyoruz
-  ],
-  view: new View({
-    center: fromLonLat([29, 39]),  // Türkiye'nin merkezine yakın bir yer
-    zoom: 5  // Başlangıç zoom seviyesi
-  })
-});
+// GeoJSON Verisi Örneği
+var fireData = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "İstanbul",
+                "fireDate": "2025-07-15",
+                "severity": 300
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [28.5, 41.0],
+                        [28.6, 41.0],
+                        [28.6, 41.1],
+                        [28.5, 41.1],
+                        [28.5, 41.0]
+                    ]
+                ]
+            }
+        },
+        // Diğer iller için veriler eklenebilir
+    ]
+};
 
-// Popup için div öğesini oluşturuyoruz
-const popup = document.createElement('div');
-popup.style.position = 'absolute';
-popup.style.background = 'white';
-popup.style.padding = '5px';
-popup.style.border = '1px solid #ff004f';
-popup.style.display = 'none'; // Başlangıçta görünmesin
-popup.style.pointerEvents = 'none';
-popup.style.zIndex = '1000'; // Popup'un katmanını üstte tutmak için z-index ekliyoruz
-document.body.appendChild(popup);
-
-// Mouse hareketlerini takip ederek feature üzerinde popup gösteriyoruz
-map.on('pointermove', (evt) => {
-  const feature = map.forEachFeatureAtPixel(evt.pixel, (f) => f); // Mouse'un hangi feature üzerine geldiğini alıyoruz
-  if (feature) {
-    const name = feature.get('name');  // Şehir adı
-    const date = feature.get('date');  // Tarih
-    popup.style.display = 'block';  // Popup'ı göster
-    popup.style.left = evt.pixel[0] + 15 + 'px';  // Popup'ı mouse'un bulunduğu konuma göre yerleştir
-    popup.style.top = evt.pixel[1] + 15 + 'px';
-    popup.innerHTML = `${name}<br><small>${date}</small>`;  // Popup içeriği
-  } else {
-    popup.style.display = 'none';  // Feature dışındaki yerlerde popup'ı gizle
-  }
-});
+// GeoJSON Verisini Haritaya Ekleyin
+L.geoJSON(fireData, {
+    style: style,
+    onEachFeature: function (feature, layer) {
+        layer.bindPopup('<h3>' + feature.properties.name + '</h3>' +
+                        '<p>Fire Date: ' + feature.properties.fireDate + '</p>' +
+                        '<p>Severity: ' + feature.properties.severity + '</p>');
+    }
+}).addTo(map);
