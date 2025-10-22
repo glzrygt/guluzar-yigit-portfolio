@@ -4,15 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects — Gülüzar Yiğit</title>
-  <link rel="stylesheet" href="style.css?v=2">
-  <link rel="stylesheet" href="style.css?v=2">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
+  
+  <!-- External CSS Files -->
+  <link rel="stylesheet" href="style.css?v=2">  <!-- Local CSS File -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">  <!-- OpenLayers CSS -->
+
 </head>
 
 <body>
   <div class="container">
     <nav>
-      <img src="public/images/logo.jpg" class="logo" alt="logo">
+      <img src="/guluzar-yigit-portfolio/public/images/logo.jpg" class="logo" alt="logo">
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="index.html#about">About</a></li>
@@ -26,8 +28,9 @@
   <main class="page">
     <h1>Projects</h1>
 
+    <!-- Hero Section for Project -->
     <div class="project-hero">
-      <img src="public/images/ndvi.png" alt="Wildfire Project">
+      <img src="guluzar-yigit-portfolio/public/images/ndvi.png" alt="Wildfire Project">
       <div class="project-text">
         <h2>Wildfire Impact Assessment in İzmir (2025)</h2>
         <p>
@@ -40,40 +43,25 @@
         <a href="https://www.linkedin.com/in/guluzaryigit" target="_blank" class="btn">To View Further Contact Me</a>
       </div>
     </div>
-<!--Türkiye Yangın Haritası -->
 
+    <!-- Türkiye Yangın Haritası -->
     <h2 style="text-align:center; margin-top:80px;">2025 Wildfire Regions in Türkiye</h2>
     <div id="fireMap" style="width:90%; height:500px; margin:40px auto; border-radius:12px; box-shadow:0 0 20px #ff004f55;"></div>
-    <div id="popup" style="
-      position:absolute; 
-      background:white; 
-      padding:8px 12px; 
-      border-radius:8px; 
-      border:2px solid #ff004f; 
-      box-shadow:0 0 10px #ff004f55; 
-      display:none; 
-      pointer-events:none;
-      font-weight:bold;
-      color:#ff004f;">
-    </div>
+    <div id="popup" style="position:absolute; background:white; padding:8px 12px; border-radius:8px; border:2px solid #ff004f; box-shadow:0 0 10px #ff004f55; display:none; pointer-events:none; font-weight:bold; color:#ff004f;"></div>
   </main>
 
-  <!-- OpenLayers CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
+  <!-- OpenLayers JavaScript -->
+  <script type="module">
+    import Map from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/Map.js';
+    import View from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/View.js';
+    import { fromLonLat } from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/proj.js';
+    import VectorLayer from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/layer/Vector.js';
+    import VectorSource from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/source/Vector.js';
+    import Feature from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/Feature.js';
+    import { Style, Fill, Stroke, Circle } from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/style.js';
+    import { Point } from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/geom.js';
 
-<!-- OpenLayers JavaScript -->
-<script type="module">
-  import Map from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/Map.js';
-  import View from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/View.js';
-  import {fromLonLat} from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/proj.js';
-  import VectorLayer from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/layer/Vector.js';
-  import VectorSource from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/source/Vector.js';
-  import Feature from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/Feature.js';
-  import {Style, Fill, Stroke} from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/style.js';
-  import {Point} from 'https://cdn.jsdelivr.net/npm/ol@v9.1.0/geom.js';
-</script>
-
-
+    // Şehir verileri
     const fireData = [
       { name: 'İzmir', coords: [27.1384, 38.4192], color: '#ff4f4f', date: '12 July 2025' },
       { name: 'Muğla', coords: [28.3636, 37.2153], color: '#ff884f', date: '20 July 2025' },
@@ -82,53 +70,58 @@
       { name: 'Adana', coords: [35.3213, 37.0022], color: '#ff9900', date: '15 August 2025' }
     ];
 
+    // Harita üzerinde gösterilecek özellikler (features)
     const features = fireData.map(f => {
       const feature = new Feature({
-        geometry: new Point(fromLonLat(f.coords)),
+        geometry: new Point(fromLonLat(f.coords)),  // Koordinatları OpenLayers projeksiyonuna dönüştür
         name: f.name,
-        date: f.date,
+        date: f.date
       });
       feature.setStyle(new Style({
         image: new Circle({
           radius: 10,
-          fill: new Fill({ color: f.color }),
-          stroke: new Stroke({ color: '#fff', width: 2 }),
+          fill: new Fill({ color: f.color }), // Şehirlerin rengi
+          stroke: new Stroke({ color: '#fff', width: 2 })  // Kenar rengi
         })
       }));
       return feature;
     });
 
+    // Vektör katmanını oluşturuyoruz
     const vectorLayer = new VectorLayer({
-      source: new VectorSource({ features }),
+      source: new VectorSource({ features })
     });
 
+    // Haritayı oluşturuyoruz
     const map = new Map({
-      target: 'fireMap',
-      layers: [vectorLayer],
+      target: 'fireMap',  // Haritanın yerleştirileceği div
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()  // OpenStreetMap katmanı
+        }),
+        vectorLayer  // Şehirlerin bulunduğu vektör katmanını ekliyoruz
+      ],
       view: new View({
-        center: fromLonLat([29, 39]),
-        zoom: 0,
-      }),
+        center: fromLonLat([29, 39]),  // Türkiye'nin merkezine yakın bir konum
+        zoom: 5  // Zoom seviyesi
+      })
     });
 
+    // Popup öğesini oluşturuyoruz
     const popup = document.getElementById('popup');
     map.on('pointermove', (evt) => {
-      const feature = map.forEachFeatureAtPixel(evt.pixel, f => f);
+      const feature = map.forEachFeatureAtPixel(evt.pixel, (f) => f); // Mouse'un hangi feature üzerine geldiğini alıyoruz
       if (feature) {
-        const name = feature.get('name');
-        const date = feature.get('date');
-        popup.style.display = 'block';
-        popup.style.left = evt.pixel[0] + 15 + 'px';
-        popup.style.top = evt.pixel[1] + 'px';
-        popup.innerHTML = `${name}<br><small>${date}</small>`;
+        const name = feature.get('name');  // Şehir adı
+        const date = feature.get('date');  // Tarih
+        popup.style.display = 'block';  // Popup'ı göster
+        popup.style.left = evt.pixel[0] + 15 + 'px';  // Popup'ı mouse'un bulunduğu konuma göre yerleştir
+        popup.style.top = evt.pixel[1] + 15 + 'px';
+        popup.innerHTML = `${name}<br><small>${date}</small>`;  // Popup içeriği
       } else {
-        popup.style.display = 'none';
+        popup.style.display = 'none';  // Feature dışındaki yerlerde popup'ı gizle
       }
     });
-    </script>
-    </body>
-    </html>
-
-
-
-
+  </script>
+</body>
+</html>
