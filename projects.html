@@ -57,69 +57,75 @@
 
     <!-- Popup element for future use (currently hidden) -->
     <div id="popup" style="position:absolute; background:white; padding:8px 12px; border-radius:8px; border:2px solid #ff004f; box-shadow:0 0 10px #ff004f55; display:none; pointer-events:none; font-weight:bold; color:#ff004f;"></div>
-    <!-- OpenLayers Harita Konteyneri -->
+    <!-- OpenLayers Map Container -->
     <div id="map"></div>
 
     <script>
-      // OpenLayers Harita Başlatma
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()  // OpenStreetMap katmanı
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([32.733711, 39.865603]),  // İzmir'in merkezi koordinatları
-          zoom: 10
-        })
-      });
+  // Initialize OpenLayers map
+  var map = new ol.Map({
+    target: 'map',  // Map will be rendered in the 'map' div
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()  // Using OpenStreetMap as the base layer
+      })
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat([32.733711, 39.865603]),  // Coordinates for Hacettepe University
+      zoom: 10  // Initial zoom level
+    })
+  });
 
-      // Yangın sembolü için stil tanımlama
-      var fireIconStyle = new ol.style.Style({
-        image: new ol.style.Icon({
-          src: 'https://upload.wikimedia.org/wikipedia/commons/9/97/Fire_Icon.svg',  // Yangın sembolü
-          scale: 0.05
-        })
-      });
+  // Define style for fire icon
+  var fireIconStyle = new ol.style.Style({
+    image: new ol.style.Icon({
+      src: 'https://upload.wikimedia.org/wikipedia/commons/9/97/Fire_Icon.svg',  // Fire icon
+      scale: 0.05  // Adjust size of the icon
+    })
+  });
 
-      // Yangın işaretçileri (Germiyan ve Nohutalan ilçeleri için)
-      var fireMarkers = [
-        { lat: 38.2121, lon: 26.3057 }, // Germiyan
-        { lat: 38.2494, lon: 26.2900 }  // Nohutalan
-      ];
+  // Fire markers for Germiyan and Nohutalan (coordinates)
+  var fireMarkers = [
+    { lat: 38.2121, lon: 26.3057 }, // Germiyan
+    { lat: 38.2494, lon: 26.2900 }  // Nohutalan
+  ];
 
-      var fireFeatures = fireMarkers.map(function(marker) {
-        var feature = new ol.Feature({
-          geometry: new ol.geom.Point(ol.proj.fromLonLat([marker.lon, marker.lat]))
-        });
-        feature.setStyle(fireIconStyle);
-        return feature;
-      });
+  // Convert fireMarkers array to OpenLayers features (for markers)
+  var fireFeatures = fireMarkers.map(function(marker) {
+    var feature = new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.fromLonLat([marker.lon, marker.lat]))  // Convert coordinates to OpenLayers format
+    });
+    feature.setStyle(fireIconStyle);  // Apply the fire icon style to each feature
+    return feature;
+  });
 
-      // Yangın işaretçilerini eklemek için bir vektör katmanı oluşturma
-      var vectorSource = new ol.source.Vector({
-        features: fireFeatures
-      });
+  // Create a vector source and add features (markers)
+  var vectorSource = new ol.source.Vector({
+    features: fireFeatures
+  });
 
-      var vectorLayer = new ol.layer.Vector({
-        source: vectorSource
-      });
+  // Create a vector layer to hold the fire markers
+  var vectorLayer = new ol.layer.Vector({
+    source: vectorSource
+  });
 
-      // Vektör katmanını haritaya ekleme
-      map.addLayer(vectorLayer);
+  // Add vector layer to the map
+  map.addLayer(vectorLayer);
 
-      // Animasyon: Yangın işaretçilerine animasyon ekleme
-      var animationDuration = 2000;  // Animasyon süresi (milisaniye)
-      fireFeatures.forEach(function(feature) {
-        feature.getGeometry().setCoordinates(ol.proj.fromLonLat([feature.getGeometry().getCoordinates()[0] + 0.0001, feature.getGeometry().getCoordinates()[1]]));
-        setTimeout(function() {
-          feature.getGeometry().setCoordinates(ol.proj.fromLonLat([feature.getGeometry().getCoordinates()[0] - 0.0001, feature.getGeometry().getCoordinates()[1]]));
-        }, animationDuration);
-      });
-    </script>
+  // Add animation: slight movement for fire markers (shaking effect)
+  var animationDuration = 2000;  // Duration of the animation in milliseconds
+  fireFeatures.forEach(function(feature) {
+    // Slightly move the marker to the right
+    feature.getGeometry().setCoordinates(ol.proj.fromLonLat([feature.getGeometry().getCoordinates()[0] + 0.0001, feature.getGeometry().getCoordinates()[1]]));
+    setTimeout(function() {
+      // Move the marker back to its original position
+      feature.getGeometry().setCoordinates(ol.proj.fromLonLat([feature.getGeometry().getCoordinates()[0] - 0.0001, feature.getGeometry().getCoordinates()[1]]));
+    }, animationDuration);
+  });
+</script>
+
   </main>
 </body>
 </html>
+
 
 
