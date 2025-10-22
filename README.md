@@ -8,12 +8,12 @@ The site serves as a personal portfolio, featuring the map visualization for my 
 
 | Objective | Status and Requirement | Weight |
 | :--- | :--- | :---: |
-| **HTML Structure** | [cite_start]At least three different HTML files (`index.html`, `projects.html`, `certificates.html`, etc.) are used[cite: 13]. | %15 |
-| **CSS: Tabular Information** | [cite_start]Tabular information with images (used for certificates) is included[cite: 16]. | %15 |
-| **CSS: Animation** | [cite_start]An animation (fire GIF shaking effect) has been applied to the OpenLayers features[cite: 15]. | %15 |
-| **OpenLayers (OL) Inclusion** | [cite_start]OpenLayers is successfully included on the web page[cite: 17]. | %20 |
-| **Git Usage** | [cite_start]Regular use of Git is demonstrated, with at least 3 commits on different days[cite: 17]. | %10 |
-| **Overall Quality** | [cite_start]The overall quality, design, and adherence to requirements are maintained[cite: 18]. | %25 |
+| **HTML Structure** | At least three different HTML files (`index.html`, `projects.html`, `certificates.html`, etc.) are used[cite: 13]. | %15 |
+| **CSS: Tabular Information** | Tabular information with images (used for certificates) is included[cite: 16]. | %15 |
+| **CSS: Animation** | An animation (fire GIF shaking effect) has been applied to the OpenLayers features[cite: 15]. | %15 |
+| **OpenLayers (OL) Inclusion** | OpenLayers is successfully included on the web page[cite: 17]. | %20 |
+| **Git Usage** | Regular use of Git is demonstrated, with at least 3 commits on different days[cite: 17]. | %10 |
+| **Overall Quality** | The overall quality, design, and adherence to requirements are maintained[cite: 18]. | %25 |
 
 ---
 
