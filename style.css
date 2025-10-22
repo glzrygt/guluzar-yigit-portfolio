@@ -435,5 +435,30 @@ nav ul li a.active::after {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Optional: Add shadow for the map */
   margin-top: 30px;  /* Optional: Add some space above the map */
 }
+/* General style for the map */
+#map {
+  width: 100%; /* Set the width of the map */
+  height: 500px; /* Set the height of the map */
+  border: 2px solid #ff004f; /* Add a red border around the map */
+  border-radius: 10px; /* Round the corners of the map */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add a shadow around the map */
+  margin-top: 30px; /* Add space between the map and content above it */
+}
+
+/* Style for the fire emoji marker */
+.ol-marker {
+  font-size: 40px; /* Adjust the size of the emoji */
+  color: #ff004f; /* Set the color of the emoji to red */
+  text-align: center; /* Center the emoji */
+  line-height: 1.2; /* Adjust the line height for the emoji */
+}
+
+/* Style for the emoji markers on the map */
+.ol-layer ol-text {
+  font-family: Arial, sans-serif; /* Use Arial font to display the emoji */
+  font-weight: bold; /* Make the emoji text bold */
+}
+
+
 
 
