@@ -341,9 +341,5 @@ main.page {
   transform: scale(1.05);
   box-shadow: 0 0 15px #ff004f;
 }
-#fireMap {
-  width: 100%;  /* Tam genişlik */
-  height: 500px;  /* Yükseklik */
-  border-radius: 12px;
-  box-shadow: 0 0 20px #ff004f55;
-}
+
+
