@@ -57,7 +57,69 @@
 
     <!-- Popup element for future use (currently hidden) -->
     <div id="popup" style="position:absolute; background:white; padding:8px 12px; border-radius:8px; border:2px solid #ff004f; box-shadow:0 0 10px #ff004f55; display:none; pointer-events:none; font-weight:bold; color:#ff004f;"></div>
+    <!-- OpenLayers Harita Konteyneri -->
+    <div id="map"></div>
+
+    <script>
+      // OpenLayers Harita Başlatma
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()  // OpenStreetMap katmanı
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([32.733711, 39.865603]),  // İzmir'in merkezi koordinatları
+          zoom: 10
+        })
+      });
+
+      // Yangın sembolü için stil tanımlama
+      var fireIconStyle = new ol.style.Style({
+        image: new ol.style.Icon({
+          src: 'https://upload.wikimedia.org/wikipedia/commons/9/97/Fire_Icon.svg',  // Yangın sembolü
+          scale: 0.05
+        })
+      });
+
+      // Yangın işaretçileri (Germiyan ve Nohutalan ilçeleri için)
+      var fireMarkers = [
+        { lat: 38.2121, lon: 26.3057 }, // Germiyan
+        { lat: 38.2494, lon: 26.2900 }  // Nohutalan
+      ];
+
+      var fireFeatures = fireMarkers.map(function(marker) {
+        var feature = new ol.Feature({
+          geometry: new ol.geom.Point(ol.proj.fromLonLat([marker.lon, marker.lat]))
+        });
+        feature.setStyle(fireIconStyle);
+        return feature;
+      });
+
+      // Yangın işaretçilerini eklemek için bir vektör katmanı oluşturma
+      var vectorSource = new ol.source.Vector({
+        features: fireFeatures
+      });
+
+      var vectorLayer = new ol.layer.Vector({
+        source: vectorSource
+      });
+
+      // Vektör katmanını haritaya ekleme
+      map.addLayer(vectorLayer);
+
+      // Animasyon: Yangın işaretçilerine animasyon ekleme
+      var animationDuration = 2000;  // Animasyon süresi (milisaniye)
+      fireFeatures.forEach(function(feature) {
+        feature.getGeometry().setCoordinates(ol.proj.fromLonLat([feature.getGeometry().getCoordinates()[0] + 0.0001, feature.getGeometry().getCoordinates()[1]]));
+        setTimeout(function() {
+          feature.getGeometry().setCoordinates(ol.proj.fromLonLat([feature.getGeometry().getCoordinates()[0] - 0.0001, feature.getGeometry().getCoordinates()[1]]));
+        }, animationDuration);
+      });
+    </script>
   </main>
 </body>
 </html>
+
 
