@@ -58,113 +58,89 @@
 
     <!-- Popup element for future use (currently hidden) -->
     <div id="popup" style="position:absolute; background:white; padding:8px 12px; border-radius:8px; border:2px solid #ff004f; box-shadow:0 0 10px #ff004f55; display:none; pointer-events:none; font-weight:bold; color:#ff004f;"></div>
+    <main class="page">
+      <h3 style="margin-top: 40px; text-align: center; color: #ff004f;">
+        Analyzed Intense Fire Areas (Germiyan, Ildır, Nohutalan)
+      </h3>
+      <div id="map" style="width: 100%; height: 500px;"></div>
+    </main>
+
     <!-- OpenLayers Map Container -->
     <div id="map" style="width: 100%; height: 500px;"></div>
 
     <script>
     // Initialize OpenLayers map
-    var map = new ol.Map({
+      var map = new ol.Map({
         target: 'map',
         layers: [
-            new ol.layer.Tile({
-                source: new ol.source.OSM()
-            })
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
         ],
         view: new ol.View({
-            // İzmit yerine İzmir koordinatları
-            center: ol.proj.fromLonLat([26.40, 38.30]), // Germiyan, Nohutalan civarında odaklanmak için
-            zoom: 11
+          center: ol.proj.fromLonLat([26.40, 38.30]), // Focus on the area around Germiyan, Nohutalan
+          zoom: 11
         })
-    });
-
-    // Define style for fire icon
-    var fireIconStyle = new ol.style.Style({
+      });
+      // Define style for fire icon
+      var fireIconStyle = new ol.style.Style({
         image: new ol.style.Icon({
-            // GIF kaynak adresi
-            src: 'https://upload.wikimedia.org/wikipedia/commons/5/5d/BurningFlame0.gif',
-            scale: 0.05, // Ölçeği biraz artırdım, daha görünür olması için
-            // Anchor ile ikonun alt orta noktasını koordinata hizalayabiliriz
-            anchor: [0.5, 1] 
+          // GIF source URL
+          src: 'https://upload.wikimedia.org/wikipedia/commons/5/5d/BurningFlame0.gif',
+          scale: 0.05, // Increased scale for better visibility
+          // Use anchor to align the icon's bottom center with the coordinate
+          anchor: [0.5, 1] 
         })
-    });
-
-    // Fire markers for Germiyan and Nohutalan (coordinates)
-    var fireMarkers = [
+      });
+      // Fire markers for Germiyan and Nohutalan (coordinates)
+      var fireMarkers = [
         { lon: 26.4925, lat: 38.3015 }, // Germiyan
         { lon: 26.4775, lat: 38.3360 },  // Nohutalan
         { lon: 26.4900, lat: 38.3600 }  // Ildır
-    ];
-
-    // Convert fireMarkers array to OpenLayers features (for markers)
-    var fireFeatures = fireMarkers.map(function(marker) {
+        ];
+      // Convert fireMarkers array to OpenLayers features (for markers)
+      var fireFeatures = fireMarkers.map(function(marker) {
         var feature = new ol.Feature({
-            // Koordinatları Feature'ın içine kaydederken dönüştür
-            geometry: new ol.geom.Point(ol.proj.fromLonLat([marker.lon, marker.lat]))
+          // Convert the coordinates to OpenLayers format and save them inside the feature
+          geometry: new ol.geom.Point(ol.proj.fromLonLat([marker.lon, marker.lat]))
         });
-        feature.setStyle(fireIconStyle); // Stili uygula
+        feature.setStyle(fireIconStyle); // Apply the style
         return feature;
-    });
-
-    // Create a vector source and layer
-    var vectorSource = new ol.source.Vector({
+      });
+      // Create a vector source and layer
+      var vectorSource = new ol.source.Vector({
         features: fireFeatures
-    });
-    var vectorLayer = new ol.layer.Vector({
+      });
+      var vectorLayer = new ol.layer.Vector({
         source: vectorSource
-    });
-
-    // Add vector layer to the map
-    map.addLayer(vectorLayer);
-
-    // 🔥 Sürekli Titreşim (Alev Sallanması) Animasyonu
-    var shakeAmount = 200; // Harita birimlerinde (metre gibi) titreme miktarı
-    var shakeInterval = 100; // Titreme hızı (milisaniye)
-    var currentOffset = shakeAmount; // Başlangıç ofseti
-
-    // Her belirlenen aralıkta (100ms) çalışacak sürekli döngü
-    setInterval(function() {
-        // Ofset yönünü değiştir: 200 birim sağa, sonra 200 birim sola
+      });
+      // Add vector layer to the map
+      map.addLayer(vectorLayer);
+      // Continuous Vibration (Flame Shaking) Animation
+      var shakeAmount = 200; // Amount of shaking in map units (meters, etc.)
+      var shakeInterval = 100; // Shaking speed (milliseconds)
+      var currentOffset = shakeAmount; // Initial offset
+      // Continuous loop that runs every set interval (100ms)
+      setInterval(function() {
+        // Change the offset direction: 200 units to the right, then 200 units to the left
         currentOffset = -currentOffset;
-
         fireFeatures.forEach(function(feature) {
-            var geometry = feature.getGeometry();
-            var coords = geometry.getCoordinates();
-
-            // Sadece X (boylam/doğu-batı) koordinatını değiştir
-            // Y (enlem/kuzey-güney) sabit kalır
-            var newCoords = [
-                coords[0] + currentOffset,
-                coords[1]
-            ];
-            
-            // Projeksiyonlu koordinatları doğrudan değiştir
-            geometry.setCoordinates(newCoords);
+          var geometry = feature.getGeometry();
+          var coords = geometry.getCoordinates();
+          // Only change the X (longitude/east-west) coordinate
+          // Y (latitude/north-south) remains fixed
+          var newCoords = [
+            coords[0] + currentOffset,
+            coords[1]
+          ];
+          // Directly change the projected coordinates
+          geometry.setCoordinates(newCoords);
         });
-
-    }, shakeInterval);
-</script>
+      }, shakeInterval);
+    </script>
   </main>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
