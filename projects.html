@@ -82,7 +82,7 @@
         image: new ol.style.Icon({
             // GIF kaynak adresi
             src: 'https://upload.wikimedia.org/wikipedia/commons/5/5d/BurningFlame0.gif',
-            scale: 0.15, // Ölçeği biraz artırdım, daha görünür olması için
+            scale: 0.2, // Ölçeği biraz artırdım, daha görünür olması için
             // Anchor ile ikonun alt orta noktasını koordinata hizalayabiliriz
             anchor: [0.5, 1] 
         })
@@ -90,9 +90,9 @@
 
     // Fire markers for Germiyan and Nohutalan (coordinates)
     var fireMarkers = [
-        { lon: 26.3057, lat: 38.2121 }, // Germiyan
-        { lon: 26.2900, lat: 38.2494 },  // Nohutalan
-        { lon: 26.2946, lat: 38.2228 }  // Ildır
+        { lon: 26.3057, lat: 38.3221 }, // Germiyan
+        { lon: 26.2900, lat: 38.3494 },  // Nohutalan
+        { lon: 26.2946, lat: 38.3228 }  // Ildır
     ];
 
     // Convert fireMarkers array to OpenLayers features (for markers)
@@ -146,6 +146,7 @@
   </main>
 </body>
 </html>
+
 
 
 
