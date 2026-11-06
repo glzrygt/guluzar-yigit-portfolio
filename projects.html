@@ -1,75 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />  <!-- Defines the character encoding (UTF-8 supports a wide range of characters) -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <!-- Ensures the page is mobile-responsive -->
-  <title>Projects — Gülüzar Yiğit</title>  <!-- The title of the page that appears in the browser tab -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Gülüzar Yiğit</title>
 
   <!-- External CSS Files -->
-  <link rel="stylesheet" href="style.css?v=2">  <!-- Local CSS file for custom styling, with versioning to ensure browsers fetch the updated version -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">  <!-- OpenLayers CSS for maps -->
-  <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script> <!-- OpenLayers JS for maps -->
-
+  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.1.0/ol.css">
+  <script src="https://cdn.jsdelivr.net/npm/ol@v9.1.0/dist/ol.js"></script>
 </head>
 
 <body>
   <div class="container">
     <nav>
       <!-- Logo image -->
-      <img src="/guluzar-yigit-portfolio/public/images/logo.jpg" class="logo" alt="logo">
+      <img src="public/images/logo.jpg" class="logo" alt="logo">
       
       <!-- Navigation menu -->
       <ul>
-        <li><a href="index.html">Home</a></li>  <!-- Links to the homepage -->
-        <li><a href="index.html#about">About</a></li>  <!-- Links to the "About" section on the homepage -->
-        <li><a href="projects.html" class="active">Projects</a></li>  <!-- Current page: Projects -->
-        <li><a href="certificates.html">Certificates</a></li>  <!-- Links to the certificates page -->
-        <li><a href="contact.html">Contact</a></li>  <!-- Links to the contact page -->
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </div>
 
-  <main class="page">
-    <!-- Main heading of the page -->
-    <h1>Projects</h1>
+<main class="page">
+    <h1 class="sub-title">Projects</h1>
 
-    <!-- Hero section for the featured project -->
+    <!-- 1. 2025 Wildfire Impact Assessment in İzmir -->
     <div class="project-hero">
-      <!-- Image related to the project -->
-      <img src="public/images/ndvi.png" alt="Wildfire Project">
-      
+      <img src="public/images/ndvi.png" alt="Wildfire Project" class="project-hero-img">
       <div class="project-text">
-        <!-- Project title -->
+        <span class="project-tag">Sentinel-2 • Google Earth Engine • QGIS</span>
         <h2>2025 Wildfire Impact Assessment in İzmir</h2>
-        
-        <!-- Project description -->
         <p>
           Conducted a post-fire vegetation analysis for İzmir’s Çeşme, Karaburun, and Urla districts using 
           <span class="pink">Sentinel-2</span> data on <span class="pink">Google Earth Engine</span>. 
-          Quantified fire severity via ΔNDVI classification, integrating <span class="pink">QGIS</span> for spatial 
-          visualization. Results revealed ~8,933 ha of vegetation loss, with notable clustering of moderate-to-severe burns 
-          around Germiyan and Nohutalan.
+          Quantified burn severity via ΔNDVI & dNBR classification, integrating <span class="pink">QGIS</span> for spatial 
+          visualization. Results revealed ~8,933 ha of vegetation loss, with notable clustering around Germiyan and Nohutalan.
         </p>
-        
-        <!-- Button linking to LinkedIn for further contact -->
-        <a href="https://www.linkedin.com/in/guluzaryigit" target="_blank" class="btn">To View Further Contact Me</a>
+        <div class="project-btns">
+          <a href="https://doi.org/10.1007/s41324-026-00690-z" target="_blank" class="btn">Read Paper (Springer)</a>
+          <a href="contact.html" class="btn">To Learn Further Contact Me</a>
+        </div>
       </div>
     </div>
 
-    <!-- Popup element for future use (currently hidden) -->
-    <div id="popup" style="position:absolute; background:white; padding:8px 12px; border-radius:8px; border:2px solid #ff004f; box-shadow:0 0 10px #ff004f55; display:none; pointer-events:none; font-weight:bold; color:#ff004f;"></div>
-    <main class="page">
-      <h3 style="margin-top: 40px; text-align: center; color: #ff004f;">
-       Analyzed Intense Fire Areas: Ildır, Germiyan, Nohutalan
-      </h3>
-      <div id="map" style="width: 100%; height: 500px;"></div>
-    </main>
+    <!-- Proje Kartı Boyutunda İnteraktif Harita Kutusu -->
+    <div class="project-hero fire-map-card">
+      <h3 class="fire-map-heading">Analyzed Intense Fire Areas: Ildır, Germiyan, Nohutalan</h3>
+      <div id="map"></div>
+    </div>
 
-    <!-- OpenLayers Map Container -->
-    <div id="map" style="width: 100%; height: 500px;"></div>
+    <!-- 2. EGO Public Transit Spatial Analysis & Network Routing -->
+    <div class="project-hero">
+      <img src="public/images/part5_fav_bus_stop.png" alt="EGO Transit Network Routing" class="project-hero-img">
+      <div class="project-text">
+        <span class="project-tag">PostGIS • pgRouting • QGIS • SQL</span>
+        <h2>EGO Public Transit Spatial Analysis & Network Routing</h2>
+        <p>
+          End-to-end spatial data engineering and network routing across Ankara using OSM road layers, EGO transit stops, and high-resolution DEM grids. Modeled pedestrian accessibility comparing <span class="pink">Euclidean proximity vs. Dijkstra-based topological routing</span>. Resolved stop-road matching conflicts via multi-tiered <span class="pink">SQL CTEs</span> and dynamic buffer overlays.
+        </p>
+        <div class="project-btns">
+          <a href="contact.html" class="btn">To Learn Further Contact Me</a>
+        </div>
+      </div>
+    </div>
 
+    <!-- 3. UAV Flight Data Analysis & Interactive WebGIS Dashboard -->
+    <div class="project-hero">
+      <img src="public/images/uav-dashboard.png" alt="UAV WebGIS Dashboard" class="project-hero-img">
+      <div class="project-text">
+        <span class="project-tag">Python • Folium • Leaflet.js • Jinja2</span>
+        <h2>UAV Flight Data Analysis & Interactive WebGIS Dashboard</h2>
+        <p>
+          Interactive geospatial decision-support dashboard simulating UAV survey telemetry and photogrammetric missions over Hacettepe Beytepe Campus. Integrates real-time flight trajectory playback, exposure angles (Roll, Pitch, Yaw), calculated photo footprint overlaps, and custom dark-mode mission HUD controls.
+        </p>
+        <div class="project-btns">
+          <a href="contact.html" class="btn">To Learn Further Contact Me</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Smartphone DGNSS Tool (TÜBİTAK 2209-A) -->
+    <div class="project-hero">
+      <img src="public/images/dgnss-architecture.png" alt="Smartphone DGNSS Tool" class="project-hero-img">
+      <div class="project-text">
+        <span class="project-tag">TÜBİTAK 2209-A • Android Raw GNSS • Geodesy</span>
+        <h2>Smartphone DGNSS Relative Positioning Tool</h2>
+        <p>
+          R&D project engineering low-cost, high-precision positioning by processing <span class="pink">Android raw GNSS observations</span> (pseudoranges and carrier phase) coupled with differential corrections from the <span class="pink">TUSAGA-Aktif CORS</span> network. Improved smartphone positioning accuracy by ~75% (Awarded 4th place at Capstone Projects).
+        </p>
+        <div class="project-btns">
+          <a href="contact.html" class="btn">To Learn Further Contact Me</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Flood Extent Mapping & Change Detection via SAR -->
+    <div class="project-hero">
+      <img src="public/images/sar-flood.png" alt="SAR Flood Mapping" class="project-hero-img">
+      <div class="project-text">
+        <span class="project-tag">Sentinel-1 (SAR) • Google Earth Engine • Otsu</span>
+        <h2>Flood Extent Mapping & Change Detection via SAR</h2>
+        <p>
+          Cloud-independent flood delineation leveraging <span class="pink">Sentinel-1 Synthetic Aperture Radar (SAR)</span> GRD imagery. Implemented Refined Lee speckle filtering and log-ratio backscatter change detection. Automated surface inundation extraction using <span class="pink">Otsu thresholding</span> on GEE, validated against Copernicus Emergency Management data.
+        </p>
+        <div class="project-btns">
+          <a href="contact.html" class="btn">To Learn Further Contact Me</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Turkey Trip - Web GIS Hometown Game -->
+    <div class="project-hero">
+      <img src="public/images/turkey-trip.png" alt="Turkey Trip GeoGame" class="project-hero-img">
+      <div class="project-text">
+        <span class="project-tag">Leaflet.js • D3.js • HTML5 Audio API</span>
+        <h2>Turkey Trip — Web GIS Hometown Game</h2>
+        <p>
+          Interactive gamified Web GIS single-page application testing provincial geography through license plates and folk melodies. Engineered dynamic GeoJSON parsing with <span class="pink">D3.js</span>, distance-based scoring on <span class="pink">Leaflet.js</span>, and a tense 10-second countdown "Survivor Mode" with custom audio triggers.
+        </p>
+        <div class="project-btns">
+          <a href="https://glzrygt.github.io/GeoGame/" target="_blank" class="btn">Play Live Demo</a>
+          <a href="contact.html" class="btn">To Learn Further Contact Me</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Spatial Point Pattern Analysis via Monte Carlo Simulation -->
+    <div class="project-hero">
+      <img src="public/images/monte-carlo.png" alt="Clark-Evans Monte Carlo" class="project-hero-img">
+      <div class="project-text">
+        <span class="project-tag">Python • Scipy Spatial • Monte Carlo</span>
+        <h2>Clark-Evans Test Verification via Monte Carlo Simulation</h2>
+        <p>
+          Spatial point pattern analysis modeling Complete Spatial Randomness (CSR) across varying point densities (N=10 to 500). Executed 1,000 Monte Carlo iterations to evaluate nearest-neighbor distance ($d_{min}$), verifying theoretical Clark-Evans variance limits and asymptotic convergence to Gaussian distributions.
+        </p>
+        <div class="project-btns">
+          <a href="contact.html" class="btn">To Learn Further Contact Me</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Spatial Data Quality Control (QC) & Analytics with PostGIS -->
+    <div class="project-hero">
+      <img src="public/images/postgis-qc.png" alt="PostGIS QC" class="project-hero-img">
+      <div class="project-text">
+        <span class="project-tag">PostgreSQL • PostGIS • Spatial QC</span>
+        <h2>Spatial Data Quality Control (QC) & Pipeline Analytics</h2>
+        <p>
+          Relational spatial database architecture focused on automated topology validation, geometry repairs (<span class="pink">ST_MakeValid</span>), duplicate entity detection (<span class="pink">ST_DWithin</span>), and multi-layer spatial joints. Built reporting pipelines for administrative boundary density and point-of-interest verification.
+        </p>
+        <div class="project-btns">
+          <a href="contact.html" class="btn">To Learn Further Contact Me</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- OpenLayers Scripti (Sayfanın en altında çalışır) -->
     <script>
-    // Initialize OpenLayers map
       var map = new ol.Map({
         target: 'map',
         layers: [
@@ -78,102 +172,52 @@
           })
         ],
         view: new ol.View({
-          center: ol.proj.fromLonLat([26.40, 38.30]), // Focus on the area around Germiyan, Nohutalan
+          center: ol.proj.fromLonLat([26.44, 38.33]),
           zoom: 11
         })
       });
-      // Define style for fire icon
+
       var fireIconStyle = new ol.style.Style({
         image: new ol.style.Icon({
-          // GIF source URL
           src: 'https://upload.wikimedia.org/wikipedia/commons/5/5d/BurningFlame0.gif',
-          scale: 0.05, // Increased scale for better visibility
-          // Use anchor to align the icon's bottom center with the coordinate
+          scale: 0.05,
           anchor: [0.5, 1] 
         })
       });
-      // Fire markers for Germiyan and Nohutalan (coordinates)
+
       var fireMarkers = [
-        { lon: 26.4925, lat: 38.3015 }, // Germiyan
-        { lon: 26.4775, lat: 38.3360 },  // Nohutalan
-        { lon: 26.4900, lat: 38.3600 }  // Ildır
-        ];
-      // Convert fireMarkers array to OpenLayers features (for markers)
+        { lon: 26.4925, lat: 38.3015 },
+        { lon: 26.4775, lat: 38.3360 },
+        { lon: 26.4900, lat: 38.3600 }
+      ];
+
       var fireFeatures = fireMarkers.map(function(marker) {
         var feature = new ol.Feature({
-          // Convert the coordinates to OpenLayers format and save them inside the feature
           geometry: new ol.geom.Point(ol.proj.fromLonLat([marker.lon, marker.lat]))
         });
-        feature.setStyle(fireIconStyle); // Apply the style
+        feature.setStyle(fireIconStyle);
         return feature;
       });
-      // Create a vector source and layer
+
       var vectorSource = new ol.source.Vector({
         features: fireFeatures
       });
       var vectorLayer = new ol.layer.Vector({
         source: vectorSource
       });
-      // Add vector layer to the map
       map.addLayer(vectorLayer);
-      // Continuous Vibration (Flame Shaking) Animation
-      var shakeAmount = 200; // Amount of shaking in map units (meters, etc.)
-      var shakeInterval = 100; // Shaking speed (milliseconds)
-      var currentOffset = shakeAmount; // Initial offset
-      // Continuous loop that runs every set interval (100ms)
+
+      // Alev titreşimi
+      var currentOffset = 200;
       setInterval(function() {
-        // Change the offset direction: 200 units to the right, then 200 units to the left
         currentOffset = -currentOffset;
         fireFeatures.forEach(function(feature) {
           var geometry = feature.getGeometry();
           var coords = geometry.getCoordinates();
-          // Only change the X (longitude/east-west) coordinate
-          // Y (latitude/north-south) remains fixed
-          var newCoords = [
-            coords[0] + currentOffset,
-            coords[1]
-          ];
-          // Directly change the projected coordinates
-          geometry.setCoordinates(newCoords);
+          geometry.setCoordinates([coords[0] + currentOffset, coords[1]]);
         });
-      }, shakeInterval);
+      }, 100);
     </script>
   </main>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
